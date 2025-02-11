@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CowT : MonoBehaviour
 {
+    private beamPull puller;
+
     // Update is called once per frame
     void Update()
     {
@@ -30,6 +32,7 @@ public class CowT : MonoBehaviour
         {
             Debug.DrawLine(this.transform.position, closestCow.transform.position, Color.red);
             Debug.Log("drawing line " + closestCow.name);
+            
         }
         else
         {

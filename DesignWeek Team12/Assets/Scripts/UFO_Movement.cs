@@ -32,9 +32,7 @@ public class UFO_Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>(); // grabs the rigudbody
-        rb.freezeRotation = true; // freezes rigidbody rotation
-
-       
+        rb.freezeRotation = true; // freezes rigidbody rotation 
        
     }
 
@@ -86,17 +84,17 @@ public class UFO_Movement : MonoBehaviour
 
         if (Physics.Raycast(beamOrigin, beamDirection, out hit, beamlenth, detect))
         {
-            Debug.Log("Hit " + hit.collider.name);
+            //Debug.Log("Hit " + hit.collider.name);
             
             Destroy(hit.transform.gameObject); // destroys the hit object for testing purposes
             
             rayCasttoggle = true;
-            Debug.Log("" + rayCasttoggle);
+            //Debug.Log("" + rayCasttoggle);
         }
         else
         {
             rayCasttoggle = false;
-            Debug.Log("" + rayCasttoggle);
+           // Debug.Log("" + rayCasttoggle);
         }
         Debug.DrawRay(beamOrigin, beamDirection * beamlenth, Color.red);
     }

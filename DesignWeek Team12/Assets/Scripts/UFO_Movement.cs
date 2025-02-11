@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UFO_Movement : MonoBehaviour
 {
+    private UFO_Beam ufoBeam; //references the UFO_beam script
 
     public float moveSpeed = 5f;
     public float alltitudeChange = 0.1f;
@@ -13,10 +15,16 @@ public class UFO_Movement : MonoBehaviour
     float horizontalMovement;
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
-    float beamlenth = 2.7f; // lenth of tyhe raycast
+    public float beamlenth = 2.7f; // lenth of tyhe raycast
     [SerializeField] public LayerMask detect; // detect layer 
+
+
+    public bool rayCasttoggle = false;
+
+    public float amp; 
+    public float freq;
 
     
 
@@ -26,14 +34,15 @@ public class UFO_Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>(); // grabs the rigudbody
         rb.freezeRotation = true; // freezes rigidbody rotation
 
-        
+       
        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        //transform.position = new Vector3(0, Mathf.Sin(Time.time* freq) * amp,0); // uses the sign wave to create a smooth bobbing movement that updates as time passes
+        //note add it so it allows movement
         tractorBeam();
     }
     private void FixedUpdate()
@@ -53,9 +62,11 @@ public class UFO_Movement : MonoBehaviour
     void movePlayer()
     {
         rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Acceleration);
+
+        //for vertical movement if needed
         if (Input.GetKey(KeyCode.Q))
         {
-            
+           // transform.position = Vector3.down * alltitudeChange;
             
         }
         if (Input.GetKeyDown(KeyCode.E))
@@ -77,8 +88,17 @@ public class UFO_Movement : MonoBehaviour
         {
             Debug.Log("Hit " + hit.collider.name);
             
+            Destroy(hit.transform.gameObject); // destroys the hit object for testing purposes
             
+            rayCasttoggle = true;
+            Debug.Log("" + rayCasttoggle);
+        }
+        else
+        {
+            rayCasttoggle = false;
+            Debug.Log("" + rayCasttoggle);
         }
         Debug.DrawRay(beamOrigin, beamDirection * beamlenth, Color.red);
     }
+    
 }

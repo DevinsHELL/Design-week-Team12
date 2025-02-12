@@ -4,30 +4,55 @@ using UnityEngine;
 
 public class beamPull : MonoBehaviour
 {
-    private CowT moveP;
-    public Vector3 targetPosition; // pull pos
-    float speed = 2f; // pull speed
-    //public int onoff = 1;
+    private Cow_movement fat;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Vector3 targetPosition; // The position the object will be pulled towards
+    public float speed = 2f; // Speed at which the object moves
+    float ground = -1.17f;
 
     // Update is called once per frame
     void Update()
     {
-        //if (onoff == 1)
-       // {
-            pull();
-        //}
+        // The object only moves when 'pull()' is triggered from CowT
+       // weight();
     }
-    void pull()
+
+    public void pull()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F)) // Moves the object only when F is pressed
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); // moves attached objects towrads a point that is specified
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            // Moves the object towards the target position at a set speed
+        }
+        else
+        {
+            transform.Translate(0,ground * Time.deltaTime * 2,0);
+        }
+    }
+    public void weight()
+    {
+        if (fat.pickup <= 1)
+        {
+            speed = 2f;
+        }
+        if (fat.pickup > 1)
+        {
+            speed = 2f;
+            while (fat.pickup < 4)
+            {
+                speed = 2;
+                if (fat.pickup >= 4)
+                {
+                    speed = 1;
+                    if (fat.pickup > 6)
+                    {
+                        speed = 0.5f;
+                    }
+                }
+            }
         }
     }
 }
+    
+
+

@@ -17,7 +17,7 @@ public class UFO_Movement : MonoBehaviour
 
     public Rigidbody rb;
 
-    public float beamlenth = 2.7f; // lenth of tyhe raycast
+    public float beamlenth = 1f; // lenth of tyhe raycast
     [SerializeField] public LayerMask detect; // detect layer 
 
 

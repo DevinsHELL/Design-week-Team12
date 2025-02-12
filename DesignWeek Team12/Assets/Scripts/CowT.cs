@@ -4,39 +4,44 @@ using UnityEngine;
 
 public class CowT : MonoBehaviour
 {
-    private beamPull puller;
+    private beamPull closestCow; // Store the closest object
 
     // Update is called once per frame
     void Update()
     {
-        closestCowPosition();
+        FindClosestCow(); // Continuously find the closest object
+
+        if (closestCow != null && Input.GetKey(KeyCode.F)) // If an object is found and F is pressed
+        {
+            closestCow.targetPosition = transform.position; // Set pull target to this object's position
+            closestCow.pull(); // Call the pull function on the object
+        }
     }
-    void closestCowPosition()
+
+    void FindClosestCow()
     {
         float distanceToCow = Mathf.Infinity;  // Sets search distance to infinity
-        beamPull closestCow = null;  // Stores the closest cow object
+        beamPull[] allCows = GameObject.FindObjectsOfType<beamPull>(); // Creates an array of all objects with the beamPull script
 
-        beamPull[] allCows = GameObject.FindObjectsOfType<beamPull>(); // Creates an array of all cows
-
-        foreach (beamPull currentCow in allCows)
+        foreach (beamPull currentCow in allCows) // Loop through all objects found
         {
-            float currentDistance = (currentCow.transform.position - this.transform.position).sqrMagnitude;
+            float currentDistance = (currentCow.transform.position - transform.position).sqrMagnitude; // Calculate distance from this object
 
-            if (currentDistance < distanceToCow) 
+            if (currentDistance < distanceToCow)
             {
                 distanceToCow = currentDistance;  // Update the closest distance
-                closestCow = currentCow;  // Assign the closest cow object
+                closestCow = currentCow;  // Assign the closest object
             }
         }
+
         if (closestCow != null)
         {
-            Debug.DrawLine(this.transform.position, closestCow.transform.position, Color.red);
-            Debug.Log("drawing line " + closestCow.name);
-            
+            Debug.DrawLine(transform.position, closestCow.transform.position, Color.red); 
+            //Debug.Log("Drawing line to " + closestCow.name);
         }
         else
         {
-            Debug.Log("none found");
+           // Debug.Log("None found"); 
         }
     }
 }

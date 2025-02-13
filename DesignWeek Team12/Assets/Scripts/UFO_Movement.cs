@@ -8,7 +8,7 @@ public class UFO_Movement : MonoBehaviour
 {
     private UFO_Beam ufoBeam; //references the UFO_beam script
 
-    public float moveSpeed = 5f;
+    public float moveSpeed = 3.5f;
     public float alltitudeChange = 0.1f;
 
     float verticalMovement;

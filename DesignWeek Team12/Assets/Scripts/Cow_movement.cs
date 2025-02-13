@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cow_movement : MonoBehaviour
 {
     //public float mass = 0.5f;
-    public float moveSpeedR = 5;
+    public float moveSpeedR = 7;
     public float boostedSpeed = 10;
     public float boostDuration = 5f; // Duration of the speed boost
     public int pickup; // for powerup weight

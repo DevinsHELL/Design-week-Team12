@@ -72,7 +72,9 @@ public class Cow_movement : MonoBehaviour
         if (other.CompareTag("PowerUp"))
         {
             ActivateSpeedBoost();
+            cowWeight();
             Destroy(other.gameObject); // Destroy the power-up object after collision
+            
         }
     }
 
@@ -81,5 +83,10 @@ public class Cow_movement : MonoBehaviour
         moveSpeedR = boostedSpeed;
         isBoosted = true;
         boostTimer = boostDuration;
+    }
+    void cowWeight()
+    {
+        beamPull.weightC++;
+        Debug.Log("Weight " + beamPull.weightC);
     }
 }

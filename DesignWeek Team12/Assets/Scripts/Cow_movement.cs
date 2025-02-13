@@ -22,7 +22,7 @@ public class Cow_movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         originalSpeed = moveSpeedR;
-        //spriterenderer = rb.GetComponent<SpriteRenderer>();
+        spriterenderer = rb.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -45,8 +45,8 @@ public class Cow_movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // rb.velocity = new Vector2(Input.GetAxisRaw("horizontal"),0f);
-        // spriterenderer.flipX = rb.velocity.x > 0;
+         //rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal2"),0f);
+         //spriterenderer.flipX = rb.velocity.x > 0;
     }
 
     void PlayerINP()
@@ -59,6 +59,12 @@ public class Cow_movement : MonoBehaviour
         if (Input.GetKey(KeyCode.K)) moveDirection += Vector3.right;
 
         rb.velocity = moveDirection * moveSpeedR;
+
+        // flip the sprite for the cow
+        if (Input.GetKey(KeyCode.K))
+            spriterenderer.flipX = true; // Face left
+        if (Input.GetKey(KeyCode.H))
+            spriterenderer.flipX = false; // Face right
     }
 
     private void OnTriggerEnter(Collider other)

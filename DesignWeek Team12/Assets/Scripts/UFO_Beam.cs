@@ -13,7 +13,7 @@ public class UFO_Beam : MonoBehaviour
     void Start()
     {
         // beam starts off
-        TBEAM.gameObject.SetActive(false);
+       // TBEAM.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

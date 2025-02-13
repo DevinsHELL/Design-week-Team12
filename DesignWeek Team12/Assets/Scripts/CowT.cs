@@ -5,43 +5,34 @@ using UnityEngine;
 public class CowT : MonoBehaviour
 {
     private beamPull closestCow; // Store the closest object
+    private bool inCollider = false; // Flag to check if an object is in the collider
 
     // Update is called once per frame
     void Update()
     {
-        FindClosestCow(); // Continuously find the closest object
-
-        if (closestCow != null && Input.GetKey(KeyCode.F)) // If an object is found and F is pressed
+        if (inCollider && closestCow != null && Input.GetKey(KeyCode.F)) // If an object is in the collider and F is pressed
         {
             closestCow.targetPosition = transform.position; // Set pull target to this object's position
             closestCow.pull(); // Call the pull function on the object
         }
     }
 
-    void FindClosestCow()
+    void OnTriggerEnter(Collider other)
     {
-        float distanceToCow = Mathf.Infinity;  // Sets search distance to infinity
-        beamPull[] allCows = GameObject.FindObjectsOfType<beamPull>(); // Creates an array of all objects with the beamPull script
-
-        foreach (beamPull currentCow in allCows) // Loop through all objects found
+        if (other.GetComponent<beamPull>() != null) // Check if the object has the beamPull script
         {
-            float currentDistance = (currentCow.transform.position - transform.position).sqrMagnitude; // Calculate distance from this object
-
-            if (currentDistance < distanceToCow)
-            {
-                distanceToCow = currentDistance;  // Update the closest distance
-                closestCow = currentCow;  // Assign the closest object
-            }
+            inCollider = true;
+            closestCow = other.GetComponent<beamPull>(); // Assign the closest object
         }
+    }
 
-        if (closestCow != null)
+    void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<beamPull>() != null) // Check if the object has the beamPull script
         {
-            Debug.DrawLine(transform.position, closestCow.transform.position, Color.red); 
-            //Debug.Log("Drawing line to " + closestCow.name);
-        }
-        else
-        {
-           // Debug.Log("None found"); 
+            inCollider = false;
+            closestCow = null; // Reset the closest object
         }
     }
 }
+

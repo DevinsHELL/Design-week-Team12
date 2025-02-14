@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
-    public void StartButton()
+    public void ContinueButton()
     {
         SceneManager.LoadScene("SampleScene");
     }
@@ -13,5 +13,10 @@ public class ButtonController : MonoBehaviour
     public void QuitGameButton()
     {
         Application.Quit();
+    }
+
+    public void StartButton()
+    {
+        SceneManager.LoadScene("InstructionScreen");
     }
 }

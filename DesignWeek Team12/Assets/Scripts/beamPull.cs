@@ -11,6 +11,7 @@ public class beamPull : MonoBehaviour
     public float speed = 2f; // Speed at which the object moves
     //float ground = -1.17f;
     public static int weightC = 0;
+    
     // Update is called once per frame
     void Update()
     {
@@ -39,6 +40,7 @@ public class beamPull : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.F) && weightC == beam.beamStrenth || weightC < beam.beamStrenth) 
         {
+           
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
             // Moves the object towards the target position at a set speed
         }

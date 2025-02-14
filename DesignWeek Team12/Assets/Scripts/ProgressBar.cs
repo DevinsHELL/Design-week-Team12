@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SliderController : MonoBehaviour
@@ -14,6 +15,10 @@ public class SliderController : MonoBehaviour
         {
             timeElapsed += Time.deltaTime; // Increment the time elapsed
             slider.value = Mathf.Clamp01(timeElapsed / duration); // Update the slider value
+            if(timeElapsed > duration)
+            {
+                SceneManager.LoadScene("EndScreen");
+            }
         }
     }
 }

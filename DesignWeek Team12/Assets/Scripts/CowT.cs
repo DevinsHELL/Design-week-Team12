@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class CowT : MonoBehaviour
 {
+    
     private beamPull closestCow; // Store the closest object
     private bool inCollider = false; // Flag to check if an object is in the collider
 
     // Update is called once per frame
+    private void Start()
+    {
+        
+    }
     void Update()
     {
-        if (inCollider && closestCow != null && Input.GetKey(KeyCode.F)) // If an object is in the collider and F is pressed
-        {
-            closestCow.targetPosition = transform.position; // Set pull target to this object's position
-            closestCow.pull(); // Call the pull function on the object
-        }
+        
+        
+            if (inCollider && closestCow != null && Input.GetKey(KeyCode.F)) // If an object is in the collider and F is pressed
+            {
+                closestCow.targetPosition = transform.position; // Set pull target to this object's position
+                closestCow.pull(); // Call the pull function on the object
+            }
+        
     }
 
     void OnTriggerEnter(Collider other)

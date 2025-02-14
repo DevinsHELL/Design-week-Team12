@@ -4,8 +4,8 @@ using UnityEngine;
 public class SkyMover : MonoBehaviour
 {
     public float duration = 60f; // Duration for the movement
-    public float startY = -5.26f; // Starting y-position
-    public float endY = 19f; // Ending y-position
+    public float startY = 18.7f; // Starting y-position
+    public float endY = 77.7f; // Ending y-position
 
     private void Start()
     {
